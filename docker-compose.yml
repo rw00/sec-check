@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  xss-demo:
+    build:
+      context: ./xss
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./xss:/app
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+
+  xsrf-insecure:
+    build:
+      context: ./xsrf
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./xsrf:/app
+    environment:
+      - FLASK_APP=insecure_site.py
+      - FLASK_DEBUG=1
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5001"]
+
+  xsrf-malicious:
+    build:
+      context: ./xsrf
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./xsrf:/app
+    environment:
+      - FLASK_APP=jackpot_site.py
+      - FLASK_DEBUG=1
+    command: ["flask", "run", "--host=0.0.0.0", "--port=5002"]

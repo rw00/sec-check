@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Login</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f2f5;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1c1e21;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.5rem;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .err {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h1>Secure Bank Login</h1>
+        <form method="POST">
+            {% if error %}
+            <p class="err">
+                {{ error }}</p>
+            {% endif %}
+            <input type="text" name="username" placeholder="Username (johndoe)" required="required">
+            <input type="password" name="password" placeholder="Password (securepass)" required="required">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>
